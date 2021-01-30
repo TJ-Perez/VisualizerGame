@@ -19,6 +19,9 @@ public class CharController : MonoBehaviour
     private float gravityValue = -9.81f;
 
     public bool groundedPlayer;
+    public Transform groundCheck;
+    public float groundDistance = 1.2f;
+    public LayerMask groundLayer;
 
 
 
@@ -36,32 +39,33 @@ public class CharController : MonoBehaviour
 
     void Update()
     {
-        // player movement - forward, backward, left, right
-        float horizontal = Input.GetAxis("Horizontal") * moveSpeed;
-        float vertical = Input.GetAxis("Vertical") * moveSpeed;
-
-        characterController.Move((cam.transform.right * horizontal + cam.transform.forward * vertical) * Time.deltaTime);
-
-        /////Jump Mechanic
 
         groundedPlayer = GroundCheck();
+        //groundedPlayer = Physics.CheckBox(transform.position, groundDistance, groundLayer);
 
-        if (!groundedPlayer)
+
+        if (groundedPlayer && playerVelocity.y < 0)
         {
-            playerVelocity.y += gravityValue * Time.deltaTime;
+            playerVelocity.y = 0;
         }
-        else if (groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;
-        }
-        else if (Input.GetButtonDown("Jump") && groundedPlayer)
+
+        Vector3 movement = Vector3.zero;
+        movement += Input.GetAxis("Horizontal") * moveSpeed * transform.right;
+        movement += Input.GetAxis("Vertical") * moveSpeed * transform.forward;
+
+        movement.y = 0;
+
+        characterController.Move(movement * Time.deltaTime);
+
+
+        if (Input.GetButtonDown("Jump") && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             //playerVelocity.y += 10;
             Debug.Log("jump attempt");
         }
 
-        //playerVelocity.y += gravityValue * Time.deltaTime;
+        playerVelocity.y += gravityValue * Time.deltaTime;
         characterController.Move(playerVelocity * Time.deltaTime);
 
 
@@ -75,7 +79,8 @@ public class CharController : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90, 90);
 
 
-        cam.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
+        //cam.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
+        gameObject.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
 
     }
 
@@ -83,8 +88,11 @@ public class CharController : MonoBehaviour
     bool GroundCheck()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1.2f))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f))
+        {
+            
             return true;
+        }
         return false;
 
     }

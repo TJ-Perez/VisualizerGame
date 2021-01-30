@@ -40,6 +40,9 @@ public class MusicToWorld : MonoBehaviour
     public float[] avgSamples = new float[12];
 
 
+    public Vector3 cubePos = new Vector3(0, 0, -8.5f);
+
+
     void Start()
     {
         song = GetComponent<AudioSource>();
@@ -94,10 +97,12 @@ public class MusicToWorld : MonoBehaviour
         {
             CreateCube();
             GameObject createdCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            createdCube.transform.position = new Vector3(0, 8.5f, 0);
-            Rigidbody cubeRB = createdCube.AddComponent<Rigidbody>();
-            cubeRB.mass = 1;
             setBoxColor(createdCube);
+
+            PlaceBox(createdCube);
+
+            //Rigidbody cubeRB = createdCube.AddComponent<Rigidbody>();
+            //cubeRB.mass = 1;
             resetSamples();
             yield return new WaitForSeconds(secBeat);
 
@@ -109,6 +114,21 @@ public class MusicToWorld : MonoBehaviour
         //GameObject createdCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         //cube.transform.position = new Vector3(0, 2.5f, 0);
 
+
+    }
+
+    void PlaceBox(GameObject cube)
+    {
+        Color32 cubeColor;
+        cubeColor = cube.GetComponent<MeshRenderer>().material.color;
+
+        float addX = 1 - cubeColor.r / 128f;
+        float addY = 1 - cubeColor.g / 128f;
+        float addZ = 2 + cubeColor.b / 128f;
+
+        cubePos += new Vector3(addX, addY, addZ);
+
+        cube.transform.position = cubePos;
 
     }
 
