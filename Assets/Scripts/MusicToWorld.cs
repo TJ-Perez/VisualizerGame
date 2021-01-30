@@ -20,19 +20,6 @@ public class MusicToWorld : MonoBehaviour
 
     private float secBeat;
 
-    private float[,] cutoffs = new float[,] { {0, 3},
-                                              {4, 8},
-                                              {9, 17},
-                                              {18, 40},
-                                              {31, 60},
-                                              {61, 100},
-                                              {101, 150}, 
-                                              {151, 200}, 
-                                              {201, 260}, 
-                                              {261, 330}, 
-                                              {331, 410}, 
-                                              {411, 511}};
-
     private float[] cutoffs2 = new float[] { 3, 8, 17, 30, 60, 100, 150, 200, 260, 330, 410, 511 };
     private float[] multipliers = new float[] { 1, 1.3f, 1.3f, 1.5f, 1, 2, 2, 2.5f, 2.7f, 7, 13, 18 };
 
@@ -41,6 +28,13 @@ public class MusicToWorld : MonoBehaviour
 
 
     public Vector3 cubePos = new Vector3(0, 0, -8.5f);
+
+
+    public Light light1;
+    public Light light2;
+    public Light light3;
+    public Light light4;
+
 
 
     void Start()
@@ -55,7 +49,7 @@ public class MusicToWorld : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         song.GetSpectrumData(samples, 0, FFTWindow.Rectangular);
         //Debug.Log(samples);
@@ -98,6 +92,16 @@ public class MusicToWorld : MonoBehaviour
             CreateCube();
             GameObject createdCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             setBoxColor(createdCube);
+            Light cubeLight = createdCube.AddComponent<Light>();
+            cubeLight.color = createdCube.GetComponent<MeshRenderer>().material.color;
+
+            //float intensity = 0.0f;
+            //createdCube.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+            //createdCube.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", cubeLight.color * intensity);
+
+
+
+            //SetLightsColor(cubeLight);
 
             PlaceBox(createdCube);
 
@@ -129,6 +133,20 @@ public class MusicToWorld : MonoBehaviour
         cubePos += new Vector3(addX, addY, addZ);
 
         cube.transform.position = cubePos;
+
+    }
+
+    void SetLightsColor(Light cubeLight)
+    {
+        //Color32 cubeColor;
+        //cubeColor = cube.GetComponent<MeshRenderer>().material.color;
+
+        //light1.color= cubeColor;
+        //light2.color = cubeColor;
+        //light3.color = cubeColor;
+        //light4.color = cubeColor;
+
+        
 
     }
 
