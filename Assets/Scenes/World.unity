@@ -440,6 +440,8 @@ MonoBehaviour:
   camSpeedHor: 4
   camSpeedVert: 4
   playerVelocity: {x: 0, y: 0, z: 0}
+  jumpHeight: 3
+  gravityValue: -14
   groundedPlayer: 0
   groundCheck: {fileID: 562418800}
   groundDistance: 1.2

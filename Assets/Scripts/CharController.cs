@@ -16,7 +16,7 @@ public class CharController : MonoBehaviour
 
     public Vector3 playerVelocity;
     public float jumpHeight;
-    private float gravityValue = -9.81f;
+    public float gravityValue = -9.81f;
 
     public bool groundedPlayer;
     public Transform groundCheck;
