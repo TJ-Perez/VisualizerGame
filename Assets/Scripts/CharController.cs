@@ -20,7 +20,7 @@ public class CharController : MonoBehaviour
 
     public bool groundedPlayer;
     public Transform groundCheck;
-    public float groundDistance = 1.2f;
+    public float feetDistance = 1f;
     public LayerMask groundLayer;
 
 
@@ -32,17 +32,36 @@ public class CharController : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void OnMouseDown()
+    void OnMouseDown()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log("enter");
+    //    Debug.Log(other.gameObject.name);
+
+    //    groundedPlayer = true;
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    Debug.Log("exit");
+
+    //    Debug.Log(other.gameObject.name);
+
+    //    groundedPlayer = false;
+    //}
+
 
 
     void Update()
     {
 
-        groundedPlayer = GroundCheck();
-        //groundedPlayer = Physics.CheckBox(transform.position, groundDistance, groundLayer);
+        //groundedPlayer = GroundCheck();
+        groundedPlayer = Physics.CheckBox(transform.position - new Vector3(0,-.8f,0), new Vector3(feetDistance,feetDistance+.9f,feetDistance), Quaternion.identity,
+        groundLayer);
 
 
         if (groundedPlayer && playerVelocity.y < 0)

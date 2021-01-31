@@ -415,6 +415,7 @@ GameObject:
   - component: {fileID: 562418800}
   - component: {fileID: 562418801}
   - component: {fileID: 562418797}
+  - component: {fileID: 562418798}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -436,18 +437,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 562418801}
   cam: {fileID: 963194227}
-  moveSpeed: 8
+  moveSpeed: 5
   camSpeedHor: 4
   camSpeedVert: 4
   playerVelocity: {x: 0, y: 0, z: 0}
-  jumpHeight: 3
+  jumpHeight: 2
   gravityValue: -14
   groundedPlayer: 0
   groundCheck: {fileID: 562418800}
-  groundDistance: 1.2
+  feetDistance: 1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 128
+--- !u!65 &562418798
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562418796}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.34335566, z: 1}
+  m_Center: {x: 0, y: -0.87509215, z: 0}
 --- !u!4 &562418800
 Transform:
   m_ObjectHideFlags: 0
@@ -2219,7 +2233,7 @@ GameObject:
   - component: {fileID: 1850882828}
   - component: {fileID: 1850882827}
   - component: {fileID: 1850882826}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2296,8 +2310,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850882825}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.012622991, y: 0.13, z: -14.71}
-  m_LocalScale: {x: 22.120354, y: 7.519399, z: 1.0640312}
+  m_LocalPosition: {x: -0.012622991, y: 0.13, z: -14.0973}
+  m_LocalScale: {x: 22.120354, y: 8.745061, z: 1.0640312}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2

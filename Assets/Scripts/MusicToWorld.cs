@@ -115,6 +115,8 @@ public class MusicToWorld : MonoBehaviour
             CreateCube();
             GameObject createdCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             setBoxColor(createdCube);
+            createdCube.layer = 7;
+
             Light cubeLight = createdCube.AddComponent<Light>();
             cubeLight.color = createdCube.GetComponent<MeshRenderer>().material.color;
 
