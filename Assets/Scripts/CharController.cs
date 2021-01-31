@@ -15,7 +15,7 @@ public class CharController : MonoBehaviour
     private float yRotation = 0.0f;
 
     public Vector3 playerVelocity;
-    private float jumpHeight = 1.0f;
+    public float jumpHeight;
     private float gravityValue = -9.81f;
 
     public bool groundedPlayer;
@@ -29,6 +29,7 @@ public class CharController : MonoBehaviour
     {
         //characterController = GetComponent<CharacterController>();
         cam = Camera.main;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnMouseDown()

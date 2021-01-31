@@ -267,7 +267,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -360,7 +360,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -436,7 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 562418801}
   cam: {fileID: 963194227}
-  moveSpeed: 4
+  moveSpeed: 8
   camSpeedHor: 4
   camSpeedVert: 4
   playerVelocity: {x: 0, y: 0, z: 0}
@@ -724,7 +724,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1092,7 +1092,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1164,7 +1164,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c45a4d427fcd4b34283094147a590e3b, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1276,6 +1276,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65a5b8f8d1af63c47a057a8b4026cf81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  songClip: {fileID: 0}
+  test: 0
+  songName: 
   cubeNum: 0
   samples:
   - 0

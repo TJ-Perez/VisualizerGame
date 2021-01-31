@@ -8,7 +8,14 @@ public class MusicToWorld : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    AudioSource song;
+    AudioSource audioSource;
+
+    public AudioClip songClip;
+
+    public int test = 0;
+
+
+    public string songName;
 
     //public GameObject cube;
 
@@ -39,19 +46,35 @@ public class MusicToWorld : MonoBehaviour
 
     void Start()
     {
-        song = GetComponent<AudioSource>();
 
-        secBeat = 1 / (bpm / 60);
+        audioSource = gameObject.GetComponent<AudioSource>();
+
+        Debug.Log(test);
+
+        songName = GameObject.Find("MenuDriver").GetComponent<MenuDriver>().dropName;
+
+        Debug.Log(songName);
+        songClip = Resources.Load<AudioClip>("Audio/" + songName);
+
+        Debug.Log(songClip.ToString());
+        audioSource.PlayOneShot(songClip);
 
         StartCoroutine(DoSomething());
 
 
+
+
+        secBeat = 1 / (bpm / 60);
+
+
+
     }
+
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        song.GetSpectrumData(samples, 0, FFTWindow.Rectangular);
+        audioSource.GetSpectrumData(samples, 0, FFTWindow.Rectangular);
         //Debug.Log(samples);
         takeSampleAvg();
 
