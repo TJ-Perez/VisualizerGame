@@ -68,7 +68,7 @@ public class CharController : MonoBehaviour
         //groundedPlayer = Physics.CheckBox(transform.position - new Vector3(0,-.8f,0), new Vector3(feetDistance,feetDistance+.9f,feetDistance), Quaternion.identity, groundLayer);
         //RaycastHit hit;
         //groundedPlayer = Physics.BoxCast(transform.position - new Vector3(0, -.8f, 0), new Vector3(feetDistance, feetDistance + .9f, feetDistance), Vector3.down, out hit, Quaternion.identity, groundLayer);
-        Collider[] hitColliders = Physics.OverlapBox(transform.position - new Vector3(0, -.8f, 0), new Vector3(feetDistance, feetDistance + .9f, feetDistance), Quaternion.identity, groundLayer);
+        Collider[] hitColliders = Physics.OverlapBox(transform.position - new Vector3(0, -.8f, 0), new Vector3(feetDistance, feetDistance + 2, feetDistance), Quaternion.identity, groundLayer);
 
         groundedPlayer = false;
         foreach (Collider hit in hitColliders){

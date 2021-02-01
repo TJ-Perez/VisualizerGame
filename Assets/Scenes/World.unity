@@ -515,7 +515,6 @@ GameObject:
   - component: {fileID: 562418800}
   - component: {fileID: 562418801}
   - component: {fileID: 562418797}
-  - component: {fileID: 562418798}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -545,25 +544,12 @@ MonoBehaviour:
   gravityValue: -14
   groundedPlayer: 0
   groundCheck: {fileID: 562418800}
-  feetDistance: 1
+  feetDistance: 0.12
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
   score: 0
-  scoreText: {fileID: 0}
---- !u!65 &562418798
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562418796}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.34335566, z: 1}
-  m_Center: {x: 0, y: -0.87509215, z: 0}
+  scoreText: {fileID: 1496018043}
 --- !u!4 &562418800
 Transform:
   m_ObjectHideFlags: 0
@@ -595,7 +581,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -1078,7 +1064,7 @@ GameObject:
   - component: {fileID: 1229976212}
   - component: {fileID: 1229976211}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: WorldEventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1239,7 +1225,7 @@ GameObject:
   - component: {fileID: 1496018044}
   - component: {fileID: 1496018043}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
