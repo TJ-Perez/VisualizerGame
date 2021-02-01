@@ -20,24 +20,32 @@ public class MenuDriver : MonoBehaviour
 
     void Awake()
     {
+
+        SceneManager.LoadScene("World", LoadSceneMode.Additive);
         DontDestroyOnLoad(transform.gameObject);
 
+    }
+
+    void OnEnable()
+    {
         playButton.onClick.AddListener(PlayGame);
 
-        GameObject.Find("Player").SetActive(false);
-        GameObject.Find("WorldEventSystem").SetActive(false);
 
-        MTW = GameObject.Find("Music Player").GetComponent<MusicToWorld>();
-
-        Debug.Log(songSelect.options[songSelect.value].text);
-        dropName = songSelect.options[songSelect.value].text;
-        MTW.test = 1;
 
     }
 
 
     void Start()
     {
+        MTW = GameObject.Find("Music Player").GetComponent<MusicToWorld>();
+
+        Debug.Log(songSelect.options[songSelect.value].text);
+        dropName = songSelect.options[songSelect.value].text;
+        MTW.test = 1;
+
+
+        GameObject.Find("Player").SetActive(false);
+        GameObject.Find("WorldEventSystem").SetActive(false);
 
     }
 
@@ -51,7 +59,7 @@ public class MenuDriver : MonoBehaviour
     {
         Debug.Log("pressed");
         //SceneManager.UnloadSceneAsync("World");
-        SceneManager.LoadScene("World");
+        SceneManager.LoadScene("World", LoadSceneMode.Single);
 
         MTW.test = 1;
         dropName = songSelect.options[songSelect.value].text;

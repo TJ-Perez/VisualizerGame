@@ -34,7 +34,7 @@ public class CharController : MonoBehaviour
     {
         //characterController = GetComponent<CharacterController>();
         cam = Camera.main;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void OnMouseDown()
