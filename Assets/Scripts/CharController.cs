@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharController : MonoBehaviour
 {
@@ -23,6 +25,9 @@ public class CharController : MonoBehaviour
     public float feetDistance = 1f;
     public LayerMask groundLayer;
 
+    public int score;
+
+    public Text scoreText;
 
 
     void Start()
@@ -60,8 +65,31 @@ public class CharController : MonoBehaviour
     {
 
         //groundedPlayer = GroundCheck();
-        groundedPlayer = Physics.CheckBox(transform.position - new Vector3(0,-.8f,0), new Vector3(feetDistance,feetDistance+.9f,feetDistance), Quaternion.identity,
-        groundLayer);
+        //groundedPlayer = Physics.CheckBox(transform.position - new Vector3(0,-.8f,0), new Vector3(feetDistance,feetDistance+.9f,feetDistance), Quaternion.identity, groundLayer);
+        //RaycastHit hit;
+        //groundedPlayer = Physics.BoxCast(transform.position - new Vector3(0, -.8f, 0), new Vector3(feetDistance, feetDistance + .9f, feetDistance), Vector3.down, out hit, Quaternion.identity, groundLayer);
+        Collider[] hitColliders = Physics.OverlapBox(transform.position - new Vector3(0, -.8f, 0), new Vector3(feetDistance, feetDistance + .9f, feetDistance), Quaternion.identity, groundLayer);
+
+        groundedPlayer = false;
+        foreach (Collider hit in hitColliders){
+            if(hit.gameObject.layer == 7)
+            {
+                groundedPlayer = true;
+            }
+
+            int nameValue;
+            if (int.TryParse(hit.gameObject.name, out nameValue))
+                if (nameValue > score)
+                {
+                    score = nameValue;
+                    scoreText.text = "Score- " + score.ToString();
+                }
+        }
+
+
+        //int nameValue;
+        //if (int.TryParse(hit.collider.gameObject.name, out nameValue))
+        //    score = nameValue;
 
 
         if (groundedPlayer && playerVelocity.y < 0)

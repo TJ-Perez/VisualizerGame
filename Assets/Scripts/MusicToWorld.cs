@@ -19,7 +19,7 @@ public class MusicToWorld : MonoBehaviour
 
     //public GameObject cube;
 
-    public int cubeNum;
+    public int cubeNum = 0;
 
     public float[] samples = new float[512];
 
@@ -49,39 +49,33 @@ public class MusicToWorld : MonoBehaviour
 
         audioSource = gameObject.GetComponent<AudioSource>();
 
-        Debug.Log(test);
+        //Debug.Log(test);
 
         songName = GameObject.Find("MenuDriver").GetComponent<MenuDriver>().dropName;
 
-        Debug.Log(songName);
+        //Debug.Log(songName);
         songClip = Resources.Load<AudioClip>("Audio/" + songName);
 
-        Debug.Log(songClip.ToString());
+        //Debug.Log(songClip.ToString());
         audioSource.PlayOneShot(songClip);
-
-        StartCoroutine(DoSomething());
-
-
 
 
         secBeat = 1 / (bpm / 60);
+        StartCoroutine(MainLoop());
+
+
+
+
+        
 
 
 
     }
 
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         audioSource.GetSpectrumData(samples, 0, FFTWindow.Rectangular);
-        //Debug.Log(samples);
         takeSampleAvg();
-
-
-
-
-        //resetSamples();
 
     }
 
@@ -107,32 +101,15 @@ public class MusicToWorld : MonoBehaviour
         Array.Clear(avgSamples, 0, avgSamples.Length);
 
     }
-    IEnumerator DoSomething()
+    IEnumerator MainLoop()
     {
 
         while (true)
         {
             CreateCube();
-            GameObject createdCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            setBoxColor(createdCube);
-            createdCube.layer = 7;
-
-            Light cubeLight = createdCube.AddComponent<Light>();
-            cubeLight.color = createdCube.GetComponent<MeshRenderer>().material.color;
-
-            //float intensity = 0.0f;
-            //createdCube.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
-            //createdCube.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", cubeLight.color * intensity);
-
-
-
-            //SetLightsColor(cubeLight);
-
-            PlaceBox(createdCube);
-
-            //Rigidbody cubeRB = createdCube.AddComponent<Rigidbody>();
-            //cubeRB.mass = 1;
+            
             resetSamples();
+
             yield return new WaitForSeconds(secBeat);
 
         }
@@ -140,8 +117,21 @@ public class MusicToWorld : MonoBehaviour
 
     void CreateCube()
     {
-        //GameObject createdCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube.transform.position = new Vector3(0, 2.5f, 0);
+        cubeNum++;
+
+        GameObject createdCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        setBoxColor(createdCube);
+        createdCube.layer = 7;
+        createdCube.name = cubeNum.ToString();
+
+
+
+        Light cubeLight = createdCube.AddComponent<Light>();
+        cubeLight.color = createdCube.GetComponent<MeshRenderer>().material.color;
+
+        SetLightsColor(cubeLight);
+
+        PlaceBox(createdCube);
 
 
     }
@@ -163,16 +153,11 @@ public class MusicToWorld : MonoBehaviour
 
     void SetLightsColor(Light cubeLight)
     {
-        //Color32 cubeColor;
-        //cubeColor = cube.GetComponent<MeshRenderer>().material.color;
 
-        //light1.color= cubeColor;
-        //light2.color = cubeColor;
-        //light3.color = cubeColor;
-        //light4.color = cubeColor;
-
-        
-
+        light1.color= cubeLight.color;
+        light2.color = cubeLight.color;
+        light3.color = cubeLight.color;
+        light4.color = cubeLight.color;
     }
 
 

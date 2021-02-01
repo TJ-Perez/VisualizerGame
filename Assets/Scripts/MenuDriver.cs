@@ -25,6 +25,7 @@ public class MenuDriver : MonoBehaviour
         playButton.onClick.AddListener(PlayGame);
 
         GameObject.Find("Player").SetActive(false);
+        GameObject.Find("WorldEventSystem").SetActive(false);
 
         MTW = GameObject.Find("Music Player").GetComponent<MusicToWorld>();
 
