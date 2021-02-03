@@ -18,6 +18,7 @@ public class MusicToWorld : MonoBehaviour
     public string songName;
 
     //public GameObject cube;
+    public GameObject course;
 
     public int cubeNum = 0;
 
@@ -47,11 +48,13 @@ public class MusicToWorld : MonoBehaviour
     void Start()
     {
 
+        course = new GameObject("Course");
+
         audioSource = gameObject.GetComponent<AudioSource>();
 
         //Debug.Log(test);
 
-        songName = GameObject.Find("MenuDriver").GetComponent<MenuDriver>().dropName;
+        songName = GameObject.Find("UIDriver").GetComponent<UIDriver>().dropName;
 
         //Debug.Log(songName);
         songClip = Resources.Load<AudioClip>("Audio/" + songName);
@@ -123,6 +126,7 @@ public class MusicToWorld : MonoBehaviour
         setBoxColor(createdCube);
         createdCube.layer = 7;
         createdCube.name = cubeNum.ToString();
+        createdCube.transform.SetParent(course.transform);
 
 
 

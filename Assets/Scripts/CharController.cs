@@ -8,6 +8,7 @@ public class CharController : MonoBehaviour
 {
     public CharacterController characterController;
     public Camera cam;
+    public UIDriver uiDriver;
 
     public float moveSpeed;
     public float camSpeedHor;
@@ -22,75 +23,44 @@ public class CharController : MonoBehaviour
 
     public bool groundedPlayer;
     public Transform groundCheck;
-    public float feetDistance = 1f;
+    public float feetDistance = .8f;
     public LayerMask groundLayer;
 
     public int score;
-
-    public Text scoreText;
 
 
     void Start()
     {
         //characterController = GetComponent<CharacterController>();
         cam = Camera.main;
-        Cursor.lockState = CursorLockMode.Locked;
+        //if (uiDriver.menuMode == false)
+            //Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     void OnMouseDown()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        if (uiDriver.menuMode == false)
+            Cursor.lockState = CursorLockMode.Locked;
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    Debug.Log("enter");
-    //    Debug.Log(other.gameObject.name);
-
-    //    groundedPlayer = true;
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    Debug.Log("exit");
-
-    //    Debug.Log(other.gameObject.name);
-
-    //    groundedPlayer = false;
-    //}
-
-
 
     void Update()
     {
+        Debug.Log("read " + uiDriver.menuMode + +Time.time);
 
-        //groundedPlayer = GroundCheck();
-        //groundedPlayer = Physics.CheckBox(transform.position - new Vector3(0,-.8f,0), new Vector3(feetDistance,feetDistance+.9f,feetDistance), Quaternion.identity, groundLayer);
-        //RaycastHit hit;
-        //groundedPlayer = Physics.BoxCast(transform.position - new Vector3(0, -.8f, 0), new Vector3(feetDistance, feetDistance + .9f, feetDistance), Vector3.down, out hit, Quaternion.identity, groundLayer);
-        Collider[] hitColliders = Physics.OverlapBox(transform.position - new Vector3(0, -.8f, 0), new Vector3(feetDistance, feetDistance + 2, feetDistance), Quaternion.identity, groundLayer);
+        if (uiDriver.menuMode == false)
+        {
+            //Debug.Log("menumode false");
+            PlayerMovement();
+            CameraUpdate();
+            CheckDeath();
 
-        groundedPlayer = false;
-        foreach (Collider hit in hitColliders){
-            if(hit.gameObject.layer == 7)
-            {
-                groundedPlayer = true;
-            }
-
-            int nameValue;
-            if (int.TryParse(hit.gameObject.name, out nameValue))
-                if (nameValue > score)
-                {
-                    score = nameValue;
-                    scoreText.text = "Score- " + score.ToString();
-                }
         }
+    }
 
-
-        //int nameValue;
-        //if (int.TryParse(hit.collider.gameObject.name, out nameValue))
-        //    score = nameValue;
-
+    void PlayerMovement()
+    {
+        GroundCheck();
 
         if (groundedPlayer && playerVelocity.y < 0)
         {
@@ -117,7 +87,12 @@ public class CharController : MonoBehaviour
         characterController.Move(playerVelocity * Time.deltaTime);
 
 
-        // Camera Update
+    }
+
+
+    void CameraUpdate()
+    {
+        //Debug.Log("cam updating");
 
         float mouseX = Input.GetAxis("Mouse X") * camSpeedHor;
         float mouseY = Input.GetAxis("Mouse Y") * camSpeedVert;
@@ -130,18 +105,61 @@ public class CharController : MonoBehaviour
         //cam.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
         gameObject.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
 
+
     }
 
 
-    bool GroundCheck()
+    void GroundCheck()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f))
+        //RaycastHit hit;
+        //if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f))
+        //{
+
+        //    return true;
+        //}
+        //return false;
+
+        //groundedPlayer = GroundCheck();
+        //groundedPlayer = Physics.CheckBox(transform.position - new Vector3(0,-.8f,0), new Vector3(feetDistance,feetDistance+.9f,feetDistance), Quaternion.identity, groundLayer);
+        //RaycastHit hit;
+        //groundedPlayer = Physics.BoxCast(transform.position - new Vector3(0, -.8f, 0), new Vector3(feetDistance, feetDistance + .9f, feetDistance), Vector3.down, out hit, Quaternion.identity, groundLayer);
+        Collider[] hitColliders = Physics.OverlapBox(transform.position - new Vector3(0, -.8f, 0), new Vector3(feetDistance, feetDistance + 1.8f, feetDistance), Quaternion.identity, groundLayer);
+
+        groundedPlayer = false;
+        foreach (Collider hit in hitColliders)
         {
-            
-            return true;
+            if (hit.gameObject.layer == 7)
+            {
+                groundedPlayer = true;
+            }
+
+            int nameValue;
+            if (int.TryParse(hit.gameObject.name, out nameValue))
+                if (nameValue > score)
+                {
+                    score = nameValue;
+                }
         }
-        return false;
+
 
     }
+
+
+    void CheckDeath()
+    {
+        if(transform.position.y <= -50)
+        {
+            Death();
+        }
+
+    }
+
+    void Death()
+    {
+        Time.timeScale = 0;
+        uiDriver.DeathUIEnable();
+
+    }
+
+
 }
