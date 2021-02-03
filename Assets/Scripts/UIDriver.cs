@@ -10,6 +10,7 @@ public class UIDriver : MonoBehaviour
 
 
     public Button playButton;
+    public Button restartButton;
     public Dropdown songSelect;
 
     public GameObject player;
@@ -64,6 +65,8 @@ public class UIDriver : MonoBehaviour
 
 
         playButton.onClick.AddListener(StartGame);
+        restartButton.onClick.AddListener(RestartGame);
+
 
         dropName = songSelect.options[songSelect.value].text;
 
@@ -78,7 +81,6 @@ public class UIDriver : MonoBehaviour
         scoreString = "Score- " + CC.score.ToString();
         scoreText.text = scoreString;
         CheckKeys();
-        //Debug.Log(player.transform.position.ToString() + "cur");
 
     }
 
@@ -123,6 +125,14 @@ public class UIDriver : MonoBehaviour
         menuMode = false;
     }
 
+    void RestartGame()
+    {
+        MTW.ResetCourse();
+        Time.timeScale = 1;
+        CC.score = 0;
+        StartGame();
+    }
+
     void GameUIEnable()
     {
         scoreText.gameObject.SetActive(true);
@@ -155,6 +165,7 @@ public class UIDriver : MonoBehaviour
         deathScore.gameObject.SetActive(false);
         scoreText.gameObject.SetActive(false);
         pauseText.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
 
     }
 
@@ -163,6 +174,8 @@ public class UIDriver : MonoBehaviour
         UIDisable();
         deathScore.text = scoreString;
         deathScore.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+
     }
 
 

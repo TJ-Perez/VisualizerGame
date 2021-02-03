@@ -31,7 +31,6 @@ public class CharController : MonoBehaviour
 
     void Start()
     {
-        //characterController = GetComponent<CharacterController>();
         cam = Camera.main;
         //if (uiDriver.menuMode == false)
             //Cursor.lockState = CursorLockMode.Locked;
@@ -46,11 +45,9 @@ public class CharController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("read " + uiDriver.menuMode + +Time.time);
 
         if (uiDriver.menuMode == false)
         {
-            //Debug.Log("menumode false");
             PlayerMovement();
             CameraUpdate();
             CheckDeath();
@@ -92,7 +89,6 @@ public class CharController : MonoBehaviour
 
     void CameraUpdate()
     {
-        //Debug.Log("cam updating");
 
         float mouseX = Input.GetAxis("Mouse X") * camSpeedHor;
         float mouseY = Input.GetAxis("Mouse Y") * camSpeedVert;
@@ -101,8 +97,6 @@ public class CharController : MonoBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90, 90);
 
-
-        //cam.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
         gameObject.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
 
 
@@ -158,8 +152,6 @@ public class CharController : MonoBehaviour
     {
         Time.timeScale = 0;
         uiDriver.DeathUIEnable();
-
     }
-
 
 }

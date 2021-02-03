@@ -10,6 +10,8 @@ public class MusicToWorld : MonoBehaviour
 
     AudioSource audioSource;
 
+    public UIDriver uiDriver;
+
     public AudioClip songClip;
 
     public int test = 0;
@@ -35,7 +37,8 @@ public class MusicToWorld : MonoBehaviour
     public float[] avgSamples = new float[12];
 
 
-    public Vector3 cubePos = new Vector3(0, 0, -8.5f);
+    private Vector3 cubeStart = new Vector3(0, 0, -8.5f);
+    private Vector3 cubePos;
 
 
     public Light light1;
@@ -47,19 +50,11 @@ public class MusicToWorld : MonoBehaviour
 
     void Start()
     {
-
+        cubePos = cubeStart;
         course = new GameObject("Course");
 
         audioSource = gameObject.GetComponent<AudioSource>();
-
-        //Debug.Log(test);
-
-        songName = GameObject.Find("UIDriver").GetComponent<UIDriver>().dropName;
-
-        //Debug.Log(songName);
-        songClip = Resources.Load<AudioClip>("Audio/" + songName);
-
-        //Debug.Log(songClip.ToString());
+        UpdateSong();
         audioSource.PlayOneShot(songClip);
 
 
@@ -153,6 +148,29 @@ public class MusicToWorld : MonoBehaviour
 
         cube.transform.position = cubePos;
 
+    }
+
+    public void ResetCourse()
+    {
+
+        Debug.Log("1");
+        foreach (Transform obj in course.transform)
+        {
+            Destroy(obj.gameObject);
+            Debug.Log("2");
+
+        }
+        cubeNum = 0;
+        cubePos = cubeStart;
+        audioSource.Stop();
+        UpdateSong();
+        audioSource.PlayOneShot(songClip);
+    }
+
+    void UpdateSong()
+    {
+        songName = uiDriver.dropName;
+        songClip = Resources.Load<AudioClip>("Audio/" + songName);
     }
 
     void SetLightsColor(Light cubeLight)
