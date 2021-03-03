@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44890535, g: 0.4954319, b: 0.55669266, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2933,7 +2933,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65a5b8f8d1af63c47a057a8b4026cf81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songClip: {fileID: 0}
+  uiDriver: {fileID: 984031930}
+  songClip: {fileID: 8300000, guid: 218de3d775007eb49b5a077c6d4bacef, type: 3}
   test: 0
   songName: 
   course: {fileID: 0}
