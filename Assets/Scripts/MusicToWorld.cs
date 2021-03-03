@@ -99,6 +99,8 @@ public class MusicToWorld : MonoBehaviour
         while (true)
         {
             CreateCube();
+
+
             
             resetSamples();
 
@@ -167,13 +169,13 @@ public class MusicToWorld : MonoBehaviour
         songClip = Resources.Load<AudioClip>("Audio/" + songName);
     }
 
-    void SetLightsColor(Light cubeLight)
+    void SetLightsColor(Light objectLight)
     {
 
-        light1.color= cubeLight.color;
-        light2.color = cubeLight.color;
-        light3.color = cubeLight.color;
-        light4.color = cubeLight.color;
+        light1.color= objectLight.color;
+        light2.color = objectLight.color;
+        light3.color = objectLight.color;
+        light4.color = objectLight.color;
     }
 
 
