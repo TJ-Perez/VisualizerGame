@@ -62,12 +62,6 @@ public class MusicToWorld : MonoBehaviour
         StartCoroutine(MainLoop());
 
 
-
-
-        
-
-
-
     }
 
     void FixedUpdate()
