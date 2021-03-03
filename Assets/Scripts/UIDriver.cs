@@ -116,11 +116,12 @@ public class UIDriver : MonoBehaviour
         UIDisable();
         GameUIEnable();
 
-
+        MTW.ResetCourse();
         CC.gameObject.GetComponent<CharacterController>().enabled = false;
         player.transform.position = startPos;
         player.transform.rotation = startRot;
         CC.gameObject.GetComponent<CharacterController>().enabled = true;
+
 
         menuMode = false;
     }
